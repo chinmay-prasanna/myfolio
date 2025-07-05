@@ -240,22 +240,28 @@ class TerminalPortfolio {
     displayCommand(command) {
         const commandEntry = document.createElement('div');
         commandEntry.className = 'command-entry';
-        
+
         const commandLine = document.createElement('div');
         commandLine.className = 'command-line-display';
-        
+
         const prompt = document.createElement('span');
         prompt.className = 'prompt-display';
-        prompt.textContent = 'chinmay@portfolio:~$';
-        
+
+        // Responsive: show only $ on small screens
+        if (window.innerWidth <= 600) {
+            prompt.textContent = '$';
+        } else {
+            prompt.textContent = 'chinmay@portfolio:~$';
+        }
+
         const commandText = document.createElement('span');
         commandText.className = 'command-display';
         commandText.textContent = command;
-        
+
         commandLine.appendChild(prompt);
         commandLine.appendChild(commandText);
         commandEntry.appendChild(commandLine);
-        
+
         this.commandHistory.appendChild(commandEntry);
     }
     
@@ -282,7 +288,7 @@ class TerminalPortfolio {
     updateCursorPosition() {
         const input = this.commandInput;
         const cursor = document.querySelector('.cursor');
-        
+
         // Create a temporary span to measure text width
         const tempSpan = document.createElement('span');
         tempSpan.style.cssText = `
@@ -290,22 +296,26 @@ class TerminalPortfolio {
             visibility: hidden;
             white-space: pre;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
+            font-size: ${window.innerWidth <= 600 ? '12px' : '14px'};
             letter-spacing: 0.5px;
         `;
         tempSpan.textContent = input.value;
-        
+
         // Add to DOM temporarily
         input.parentNode.appendChild(tempSpan);
-        
+
         // Get the width of the text
         const textWidth = tempSpan.offsetWidth;
-        
+
         // Remove temporary span
         input.parentNode.removeChild(tempSpan);
-        
-        // Position cursor at the end of text with minimal spacing
-        cursor.style.left = (textWidth + 2) + 'px';
+
+        // On small screens, align cursor with input text (no margin)
+        if (window.innerWidth <= 600) {
+            cursor.style.left = (textWidth + 2) + 'px';
+        } else {
+            cursor.style.left = (textWidth + 2) + 'px';
+        }
     }
     
     // Command implementations
