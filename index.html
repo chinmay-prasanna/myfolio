@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Portfolio - Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Particles.js Background -->
+    <div id="particles-js"></div>
+    
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="close-btn"></span>
+                <span class="minimize-btn"></span>
+                <span class="maximize-btn"></span>
+            </div>
+            <div class="terminal-title">chinmay@portfolio:~$</div>
+        </div>
+        
+        <div class="terminal-body">
+            <div class="welcome-message">
+                <div class="ascii-art">
+                    <pre>
+██╗  ██╗███████╗██╗    ██╗   ███████╗██╗  ██╗
+██║ ██╔╝██╔════╝██║    ██║   ██╔════╝██║  ██║
+█████╔╝ █████╗  ██║ █╗ ██║   ███████╗███████║
+██╔═██╗ ██╔══╝  ██║███╗██║   ╚════██║██╔══██║
+██║  ██╗███████╗╚███╔███╔╝██╗███████║██║  ██║
+╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝╚══════╝╚═╝  ╚═╝
+                    </pre>
+                </div>
+                <p class="welcome-text">Welcome to Chinmay's Backend Developer Portfolio</p>
+                <p class="subtitle">Type 'help' to see available commands</p>
+            </div>
+            
+            <div class="command-history" id="commandHistory"></div>
+            
+            <div class="command-line">
+                <span class="prompt">chinmay@portfolio:~$</span>
+                <div style="position: relative; flex: 1;">
+                    <input type="text" id="commandInput" class="command-input" placeholder="Enter command..." autocomplete="off">
+                    <span class="cursor">|</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

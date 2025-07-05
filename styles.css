@@ -1,0 +1,378 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0d0d0d 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Particles.js Background */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    z-index: 1;
+    background: transparent;
+}
+
+#particles-js canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 1000px;
+    height: 80vh;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(0, 245, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+    border: 1px solid rgba(60, 60, 60, 0.2);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.terminal-container:hover {
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 245, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, rgba(50, 50, 50, 0.8), rgba(35, 35, 35, 0.8));
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(70, 70, 70, 0.3);
+    position: relative;
+}
+
+.terminal-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 0, 0.15), transparent);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-right: 25px;
+}
+
+.close-btn, .minimize-btn, .maximize-btn {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.close-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    box-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
+}
+
+.minimize-btn {
+    background: linear-gradient(135deg, #ffd93d, #f6c90e);
+    box-shadow: 0 2px 4px rgba(255, 217, 61, 0.2);
+}
+
+.maximize-btn {
+    background: linear-gradient(135deg, #51cf66, #40c057);
+    box-shadow: 0 2px 4px rgba(81, 207, 102, 0.2);
+}
+
+.close-btn:hover, .minimize-btn:hover, .maximize-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.terminal-title {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.terminal-body {
+    padding: 25px;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    background: rgba(20, 20, 20, 0.9);
+    position: relative;
+}
+
+.terminal-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 0, 0.08), transparent);
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 35px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ascii-art {
+    color: rgba(0, 245, 0, 0.6);
+    font-size: 8px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(0, 245, 0, 0.2);
+    animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px rgba(0, 245, 0, 0.2);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(0, 245, 0, 0.3);
+    }
+}
+
+.welcome-text {
+    color: rgba(0, 245, 0, 0.7);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: rgba(150, 150, 150, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.command-history {
+    margin-bottom: 25px;
+}
+
+.command-entry {
+    margin-bottom: 20px;
+    animation: fadeIn 0.4s ease-in;
+}
+
+.command-line-display {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.prompt-display, .prompt {
+    color: rgb(0, 245, 0);
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.command-display {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.command-output {
+    color: rgba(220, 220, 220, 0.8);
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    background: rgba(35, 35, 35, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 18px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(0, 245, 0, 0.3);
+    margin-left: 25px;
+    overflow-x: auto;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+}
+
+.command-output:hover {
+    border-left-color: rgba(0, 245, 0, 0.4);
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.json-output {
+    color: rgba(0, 245, 0, 0.7);
+    text-shadow: 0 0 4px rgba(0, 245, 0, 0.15);
+}
+
+.error-output {
+    color: rgba(255, 107, 107, 0.8);
+    border-left-color: rgba(255, 107, 107, 0.3);
+    text-shadow: 0 0 4px rgba(255, 107, 107, 0.15);
+}
+
+.command-line {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: rgba(35, 35, 35, 0.4);
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(70, 70, 70, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.command-input {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    caret-color: transparent;
+    letter-spacing: 0.5px;
+}
+
+.command-input::placeholder {
+    color: rgba(120, 120, 120, 0.5);
+}
+
+.command-input:focus::placeholder {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.cursor {
+    color: rgb(0, 245, 0);
+    text-shadow: 0 0 8px rgb(0, 245, 0), 0 0 2px rgb(0, 245, 0);
+    animation: blink 1s steps(2, start) infinite;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.4; }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Scrollbar styling */
+.terminal-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: rgba(35, 35, 35, 0.4);
+    border-radius: 5px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(70, 70, 70, 0.5);
+    border-radius: 5px;
+    border: 2px solid rgba(35, 35, 35, 0.4);
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 100, 0.6);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .terminal-container {
+        width: 95%;
+        height: 90vh;
+    }
+    
+    .ascii-art {
+        font-size: 6px;
+    }
+    
+    .welcome-text {
+        font-size: 16px;
+    }
+    
+    .terminal-body {
+        padding: 20px;
+    }
+}
+
+/* Command suggestions */
+.command-suggestions {
+    color: rgba(120, 120, 120, 0.6);
+    font-style: italic;
+    margin-top: 8px;
+    margin-left: 25px;
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(70, 70, 70, 0.4);
+    border-radius: 50%;
+    border-top-color: rgba(0, 245, 0, 0.6);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+} 
