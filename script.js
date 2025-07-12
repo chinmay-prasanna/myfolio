@@ -420,7 +420,7 @@ curl resume     - Download resume PDF`;
         if (args.length === 1 && args[0] === 'resume') {
             // Trigger download of the resume PDF
             const link = document.createElement('a');
-            link.href = './Chinmay P (4).pdf';
+            link.href = './Resume.pdf';
             link.download = 'Chinmay_Prasanna_Resume.pdf';
             document.body.appendChild(link);
             link.click();
